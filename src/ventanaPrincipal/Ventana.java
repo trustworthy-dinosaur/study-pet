@@ -7,15 +7,21 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import mascota.Mascota;
+import mascota.VentanaMascota;
+
 public class Ventana extends JFrame{
+	Mascota m = new Mascota();
 
 	private static final long serialVersionUID = -4737376985574446318L;
 
@@ -34,12 +40,12 @@ public class Ventana extends JFrame{
 			
 			JPanelRound pMascot = new JPanelRound(new BorderLayout());
 				pMascot.setBackground(new Color(111, 93, 79));
+				
 				JLabel eMascot = new JLabel("⛶", JLabel.RIGHT);
-				eMascot.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 10));
-				eMascot.setFont(new Font(getName(), Font.BOLD, 20));
-				eMascot.setForeground(pMascot.getBackground().darker())
-				;
-				eMascot.addMouseListener(new MouseAdapter() {
+					eMascot.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 10));
+					eMascot.setFont(new Font(getName(), Font.BOLD, 20));
+					eMascot.setForeground(pMascot.getBackground().darker());
+					eMascot.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						super.mouseClicked(e);
@@ -59,7 +65,21 @@ public class Ventana extends JFrame{
 					}
 				});
 				
+					Image imagen = m.getImagen().getImage().getScaledInstance(100, 100,Image.SCALE_SMOOTH);
+					JLabel mascota = new JLabel(new ImageIcon(imagen));
+					
+					JPanel pmStats = new JPanel(new GridLayout());
+						pmStats.setOpaque(false);
+						pmStats.add(new JLabel("aqui van las barras de vida"));
+					
+					
+					JPanel pmGeneral = new JPanel(new BorderLayout());
+						pmGeneral.setOpaque(false);
+						pmGeneral.add(mascota, BorderLayout.NORTH);
+						pmGeneral.add(pmStats);
+					
 				pMascot.add(eMascot, BorderLayout.NORTH);
+				pMascot.add(pmGeneral, BorderLayout.CENTER);
 				
 				gbc.gridy = 0;
 				gbc.weighty = 0.7;
@@ -70,6 +90,10 @@ public class Ventana extends JFrame{
 				gbc.gridy = 1;
 				gbc.weighty = 0.3;
 				pMascotPomod.add(pTimer, gbc);
+				
+		//Para no alterar tamaños
+			pMascot.setPreferredSize(new Dimension(0, 0));
+			pTimer.setPreferredSize(new Dimension(0, 0));
 			
 		pPrincipal.add(pMascotPomod);
 		

@@ -1,4 +1,4 @@
-package ventanaPrincipal;
+package mascota;
 
 import java.awt.GridLayout;
 
