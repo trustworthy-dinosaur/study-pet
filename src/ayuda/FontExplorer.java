@@ -14,8 +14,6 @@ import javax.swing.RowFilter;
 
 public class FontExplorer extends JFrame {
 	
-	// prueba carmen
-	
 
     private static final long serialVersionUID = 1L;
     private final DefaultTableModel model;

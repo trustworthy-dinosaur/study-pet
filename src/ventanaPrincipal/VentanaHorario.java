@@ -14,7 +14,7 @@ public class VentanaHorario extends JFrame {
 		JPanel pPrincipal = new JPanel(new GridLayout(1, 3, 20, 20));
 		this.getContentPane().add(pPrincipal);
 		
-		pPrincipal.add(new JLabel("Horario"));
+		pPrincipal.add(new JLabel("Horario - Marina"));
 		
 		this.setSize(960, 600);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
