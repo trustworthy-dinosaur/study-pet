@@ -13,9 +13,10 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.RowFilter;
 
 public class FontExplorer extends JFrame {
+	
+	// ola caracola
 
     private static final long serialVersionUID = 1L;
-
     private final DefaultTableModel model;
     private final JTable table;
     private final JTextField txtBuscar;
