@@ -2,6 +2,7 @@ package ventanaPrincipal;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -68,12 +69,38 @@ public class Ventana extends JFrame{
 					Image imagen = m.getImagen().getImage().getScaledInstance(100, 100,Image.SCALE_SMOOTH);
 					JLabel mascota = new JLabel(new ImageIcon(imagen));
 					
-					JPanel pmStats = new JPanel(new GridLayout());
+					JPanel pmStats = new JPanel(new GridLayout(6, 1, 5, 5));
 						pmStats.setOpaque(false);
-						pmStats.add(new JLabel("aqui van las barras de vida"));
-					
+						
+						JLabel pmHunger = new JLabel("Estómago");
+							pmStats.add(pmHunger);
+						JPanelRound pmpHunger = new JPanelRound(new BorderLayout());
+							JPanelRound pmpaHunger = new JPanelRound();
+								pmpaHunger.setBackground(Color.BLACK);
+								pmpaHunger.setPreferredSize(new Dimension(200, pmpHunger.getHeight()));
+								pmpHunger.add(pmpaHunger, BorderLayout.WEST);
+							pmStats.add(pmpHunger);
+
+						JLabel pmHappiness = new JLabel("Felicidad");
+							pmStats.add(pmHappiness);
+						JPanelRound pmpHappiness = new JPanelRound(new BorderLayout());
+							JPanelRound pmpaHappiness = new JPanelRound();
+								pmpaHappiness.setBackground(Color.BLACK);
+								pmpaHappiness.setPreferredSize(new Dimension(100, pmpHappiness.getHeight()));
+								pmpHappiness.add(pmpaHappiness, BorderLayout.WEST);
+							pmStats.add(pmpHappiness);
+							
+						JLabel pmEnergy = new JLabel("Energía");
+							pmStats.add(pmEnergy);
+						JPanelRound pmpEnergy = new JPanelRound(new BorderLayout());
+							JPanelRound pmpaEnergy = new JPanelRound();
+								pmpaEnergy.setBackground(Color.BLACK);
+								pmpaEnergy.setPreferredSize(new Dimension(160, pmpEnergy.getHeight()));
+								pmpEnergy.add(pmpaEnergy, BorderLayout.WEST);
+							pmStats.add(pmpEnergy);
 					
 					JPanel pmGeneral = new JPanel(new BorderLayout());
+						pmGeneral.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 						pmGeneral.setOpaque(false);
 						pmGeneral.add(mascota, BorderLayout.NORTH);
 						pmGeneral.add(pmStats);
