@@ -14,7 +14,7 @@ import javax.swing.RowFilter;
 
 public class FontExplorer extends JFrame {
 	
-
+	//Esto solo es de prueba luego lo quitamos
     private static final long serialVersionUID = 1L;
     private final DefaultTableModel model;
     private final JTable table;
