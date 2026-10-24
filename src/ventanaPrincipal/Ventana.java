@@ -2,7 +2,6 @@ package ventanaPrincipal;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -17,14 +16,27 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import mascota.Mascota;
 import mascota.VentanaMascota;
 
 public class Ventana extends JFrame{
-	Mascota m = new Mascota();
+	public static Mascota m = new Mascota();
 
 	private static final long serialVersionUID = -4737376985574446318L;
+
+	
+	
+	public static Mascota getM() {
+		return m;
+	}
+
+
+
+	public static void setM(Mascota m) {
+		Ventana.m = m;
+	}
+
+
 
 	public Ventana() {
 		JPanel pPrincipal = new JPanel(new GridLayout(1, 3, 20, 20));
@@ -51,6 +63,7 @@ public class Ventana extends JFrame{
 					public void mouseClicked(MouseEvent e) {
 						super.mouseClicked(e);
 						new VentanaMascota();
+						dispose();
 					}
 					
 					@Override
