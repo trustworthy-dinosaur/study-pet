@@ -3,6 +3,7 @@ package ventanaPrincipal;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -204,8 +205,26 @@ public class Ventana extends JFrame{
 		pPrincipal.add(pGreetings);
 		
 		
-		JPanelRound pStats = new JPanelRound(new BorderLayout());
+		JPanelRound pStats = new JPanelRound(new BorderLayout(10,30));
 			pStats.setBackground(new Color(223, 147, 157));
+			
+			
+			
+			JPanel division = new JPanel(new GridLayout(2,1,5,5));
+			division.setBackground(new Color(223,147,157));
+			
+			JPanel cuadraditos = new JPanel(new GridLayout(4,1,8,8));
+			
+			//Cambiar color para que no quede en los espacios blanco
+			cuadraditos.setBackground(new Color(223,147,157));
+			
+			for (int i = 0; i < 4; i++) {
+				JPanel cuadradito = new JPanel();
+				cuadradito.setBackground(new Color(223,147,157).darker());
+				cuadraditos.add(cuadradito);
+			}
+			
+			division.add(cuadraditos);
 			
 			JLabel eStats = new JLabel("⛶", JLabel.RIGHT);
 			eStats.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 10));
@@ -232,7 +251,11 @@ public class Ventana extends JFrame{
 				}
 			});
 			
+		
 			pStats.add(eStats, BorderLayout.NORTH);
+			
+			
+			pStats.add(division, BorderLayout.CENTER);
 			
 		pPrincipal.add(pStats);
 		
