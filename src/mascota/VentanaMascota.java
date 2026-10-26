@@ -2,9 +2,11 @@ package mascota;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
@@ -46,8 +48,30 @@ public class VentanaMascota extends JFrame {
 			pTitulo.add(titulo, BorderLayout.CENTER);
 			
 		Image imagen = Ventana.getM().getImagen().getImage().getScaledInstance(100, 100,Image.SCALE_SMOOTH);
-			JLabel mascota = new JLabel(new ImageIcon(imagen));	
-			pPrincipal.add(mascota, BorderLayout.SOUTH);
+			JLabel mascota = new JLabel(new ImageIcon(imagen));
+			
+		JPanel prado = new JPanel(null);
+		prado.setPreferredSize(new Dimension(250, 150));
+			prado.add(mascota);
+			mascota.setSize(100, 100);
+			Thread movimientoMascota = new Thread(() -> {
+				 while (true) {
+					 mascota.setLocation(75, 0);
+					 prado.revalidate();
+					 prado.repaint();
+					 System.out.println(mascota.getLocation());
+					 try {
+							Thread.sleep(500);
+						} catch (InterruptedException e) {
+						}
+					 mascota.setLocation(75, 50);
+					 prado.revalidate();
+					 prado.repaint();
+					 System.out.println(mascota.getLocation());
+				    }
+			});
+			movimientoMascota.start();
+			pPrincipal.add(prado, BorderLayout.SOUTH);
 		
 		this.setSize(960, 600);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
