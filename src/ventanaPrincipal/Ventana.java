@@ -1,9 +1,7 @@
 package ventanaPrincipal;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,11 +10,17 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Calendar;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import mascota.Mascota;
 import mascota.VentanaMascota;
 
@@ -25,25 +29,29 @@ public class Ventana extends JFrame{
 
 	private static final long serialVersionUID = -4737376985574446318L;
 
-	
-	
 	public static Mascota getM() {
 		return m;
 	}
 
-
-
 	public static void setM(Mascota m) {
 		Ventana.m = m;
 	}
-
-
+	
+	private String saludo() {
+		int hora =Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+		if (hora >= 6 && hora < 12) {
+			return "Buenos días";
+		} else if (hora >= 12 && hora < 21) {
+			return "Buenas tardes";
+		} else {
+			return "Buenas noches";
+		}
+	}
 
 	public Ventana() {
 		JPanel pPrincipal = new JPanel(new GridLayout(1, 3, 20, 20));
 		this.getContentPane().add(pPrincipal);
 
-		
 		JPanel pMascotPomod = new JPanel(new GridBagLayout());
 			pMascotPomod.setOpaque(false);
 			
@@ -174,18 +182,53 @@ public class Ventana extends JFrame{
 					}
 				});
 				
+				
+				// Hora que va cambiando arriba
+				
 				pTime.add(eTime, BorderLayout.NORTH);
-			
+				
+				JLabel lFechaHora = new JLabel("",JLabel.CENTER);
+				lFechaHora.setFont(new Font("Dubai Medium", Font.BOLD, 22));
+				lFechaHora.setForeground(pTime.getBackground().darker().darker());
+				pTime.add(lFechaHora, BorderLayout.CENTER);
 
+				SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy  HH:mm:ss");
+
+				Timer timerReloj =new Timer(1000, new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						lFechaHora.setText(formato.format(new Date()));
+					}
+				});
+				
+				timerReloj.setInitialDelay(0);
+				timerReloj.start();
+				
 				gbc1.gridy = 0;
 				gbc1.weighty = 0.2;
 				pGreetings.add(pTime, gbc1);
-			
-			JPanelRound pHoli = new JPanelRound(new BorderLayout());
+				
+				
+				// saludo que va cambiando según la hora del del día
+				
+				JPanelRound pHoli = new JPanelRound(new BorderLayout());
 				pHoli.setOpaque(false);
-				JLabel holi = new JLabel("HOLI", JLabel.CENTER);
-				holi.setFont(new Font("Dubai Medium", Font.BOLD, 60));
+				final JLabel holi = new JLabel(saludo(), JLabel.CENTER);
+				holi.setFont(new Font("Dubai Medium", Font.BOLD, 36));
+				holi.setForeground(pTime.getBackground().darker().darker());
 				pHoli.add(holi, BorderLayout.CENTER);
+
+				
+				Timer timerSaludo = new Timer(60000, new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						holi.setText(saludo());
+					}
+				});
+				timerSaludo.start();
+
+				gbc1.gridy = 1;
+				gbc1.weighty = 0.2;
+				pGreetings.add(pHoli, gbc1);
+
 				gbc1.gridy = 1;
 				gbc1.weighty = 0.2;
 				pGreetings.add(pHoli, gbc1);
@@ -261,13 +304,14 @@ public class Ventana extends JFrame{
 		
 		
 		
-		
 		//Default
 		
 		pPrincipal.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		this.setSize(960, 600);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setVisible(true);
-	}
+		
+		
+	}		
 
 }
