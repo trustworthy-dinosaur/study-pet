@@ -16,6 +16,10 @@ public class VentanaStats extends JFrame {
 		
 		pPrincipal.add(new JLabel("Stats - Nerea"));
 		
+		
+		
+		
+		
 		this.setSize(960, 600);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setVisible(true);

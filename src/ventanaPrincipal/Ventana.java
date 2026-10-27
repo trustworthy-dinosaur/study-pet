@@ -2,6 +2,7 @@ package ventanaPrincipal;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -261,9 +262,16 @@ public class Ventana extends JFrame{
 			//Cambiar color para que no quede en los espacios blanco
 			cuadraditos.setBackground(new Color(223,147,157));
 			
+			JLabel [] texto= {new JLabel("Tiempo total estudio:"),
+			 new JLabel("Sesión más larga:"),
+			 new JLabel("Día con más horas:"),
+			 new JLabel("Promedio estudio:")
+			};
+			
 			for (int i = 0; i < 4; i++) {
-				JPanel cuadradito = new JPanel();
-				cuadradito.setBackground(new Color(223,147,157).darker());
+				JPanel cuadradito = new JPanel(new FlowLayout(FlowLayout.LEFT, 20,20));
+				cuadradito.setBackground(new Color(223,147,157));
+				cuadradito.add(texto[i]);
 				cuadraditos.add(cuadradito);
 			}
 			
