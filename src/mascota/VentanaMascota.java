@@ -68,7 +68,7 @@ public class VentanaMascota extends JFrame {
 					 prado.revalidate();
 					 prado.repaint();
 					 System.out.println(mascota.getLocation());
-				    }
+				    }//Ordinaria año pasado
 			});
 			movimientoMascota.start();
 			pPrincipal.add(prado, BorderLayout.SOUTH);

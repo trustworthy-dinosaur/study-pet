@@ -21,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.Timer;
 import mascota.Mascota;
 import mascota.VentanaMascota;
@@ -97,29 +98,17 @@ public class Ventana extends JFrame{
 						
 						JLabel pmHunger = new JLabel("Estómago");
 							pmStats.add(pmHunger);
-						JPanelRound pmpHunger = new JPanelRound(new BorderLayout());
-							JPanelRound pmpaHunger = new JPanelRound();
-								pmpaHunger.setBackground(Color.BLACK);
-								pmpaHunger.setPreferredSize(new Dimension(200, pmpHunger.getHeight()));
-								pmpHunger.add(pmpaHunger, BorderLayout.WEST);
+						JProgressBar pmpHunger = new JProgressBar();
 							pmStats.add(pmpHunger);
 
 						JLabel pmHappiness = new JLabel("Felicidad");
 							pmStats.add(pmHappiness);
-						JPanelRound pmpHappiness = new JPanelRound(new BorderLayout());
-							JPanelRound pmpaHappiness = new JPanelRound();
-								pmpaHappiness.setBackground(Color.BLACK);
-								pmpaHappiness.setPreferredSize(new Dimension(100, pmpHappiness.getHeight()));
-								pmpHappiness.add(pmpaHappiness, BorderLayout.WEST);
+						JProgressBar pmpHappiness = new JProgressBar();
 							pmStats.add(pmpHappiness);
 							
 						JLabel pmEnergy = new JLabel("Energía");
 							pmStats.add(pmEnergy);
-						JPanelRound pmpEnergy = new JPanelRound(new BorderLayout());
-							JPanelRound pmpaEnergy = new JPanelRound();
-								pmpaEnergy.setBackground(Color.BLACK);
-								pmpaEnergy.setPreferredSize(new Dimension(160, pmpEnergy.getHeight()));
-								pmpEnergy.add(pmpaEnergy, BorderLayout.WEST);
+						JProgressBar pmpEnergy = new JProgressBar();
 							pmStats.add(pmpEnergy);
 					
 					JPanel pmGeneral = new JPanel(new BorderLayout());
