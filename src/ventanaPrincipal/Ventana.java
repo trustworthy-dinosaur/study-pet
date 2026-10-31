@@ -305,7 +305,7 @@ public class Ventana extends JFrame{
 		
 		pPrincipal.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		this.setSize(960, 600);
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 		
 		

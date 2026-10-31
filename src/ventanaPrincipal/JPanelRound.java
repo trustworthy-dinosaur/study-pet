@@ -8,7 +8,7 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 public class JPanelRound extends JPanel{
-
+	//Hecho con IA
 	private static final long serialVersionUID = 6262345517570519467L;
 
 	public JPanelRound() {

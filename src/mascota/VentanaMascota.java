@@ -7,7 +7,9 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
+import ventanaPrincipal.JButtonRound;
 import ventanaPrincipal.Ventana;
 
 public class VentanaMascota extends JFrame {
@@ -45,38 +47,55 @@ public class VentanaMascota extends JFrame {
 		JPanel content = new JPanel(new CardLayout());
 		JPanel centro = new JPanel(new BorderLayout());
 			pPrincipal.add(centro, BorderLayout.CENTER);
-			JPanel botones = new JPanel(new FlowLayout());
+			centro.add(content, BorderLayout.CENTER);
+			
+		JPanel botones = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+			botones.setBackground(new Color(207, 196, 186));
 			CardLayout cl = (CardLayout)(content.getLayout());
+			
 			JButton mercado = new JButton("Mercado");
+				mercado.setBackground(new Color(168, 154, 140));
+				mercado.setBorderPainted(false);
+				botones.add(mercado);
+				
+			JButton info = new JButton("Info");
+				info.setBackground(new Color(232, 224, 216));
+				info.setBorderPainted(false);
+				
 				mercado.addActionListener(new ActionListener() {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						cl.show(content, "MERCADO");
+						mercado.setBackground(new Color(168, 154, 140));
+						info.setBackground(new Color(232, 224, 216));
 					}
 				});
-				botones.add(mercado);
-			JButton info = new JButton("Info");
-			info.addActionListener(new ActionListener() {
+				
+				info.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					cl.show(content, "INFO");
-					
+					info.setBackground(new Color(168, 154, 140));
+					mercado.setBackground(new Color(232, 224, 216));
 				}
 			});
 				botones.add(info);
+				
 			centro.add(botones, BorderLayout.NORTH);
-			
 
-			centro.add(content, BorderLayout.CENTER);
-			
 		JPanel pMercado =new JPanel(new BorderLayout());
-			//pMercado.add(new JLabel("Tabla de info sacada de Base de Datos con comida, precio, etc..."));
 			initTables();
 			JPanel tabla = new JPanel(new BorderLayout());
-			//TODO: barra para buscar
+			this.mercadillo.setBackground(new Color(232, 224, 216));
+			mercadillo.getTableHeader().setBackground(new Color(168, 154, 140));
+			mercadillo.getTableHeader().setForeground(Color.WHITE);
+			mercadillo.getTableHeader().setFont(new Font("Segoe UI Symbol", Font.BOLD, 15));
+			mercadillo.setShowGrid(false);
 			JScrollPane scroll = new JScrollPane(this.mercadillo);
+			scroll.getViewport().setBackground(new Color(232, 224, 216));
+			scroll.setBorder(BorderFactory.createEmptyBorder());
 			
 			this.txtFiltro = new JTextField(20);
 			txtFiltro.getDocument().addDocumentListener(new DocumentListener() {
@@ -98,6 +117,7 @@ public class VentanaMascota extends JFrame {
 			});
 			
 			JPanel buscador = new JPanel(new FlowLayout());
+			buscador.setBackground(new Color(168, 154, 140));
 				buscador.add(txtFiltro);
 			tabla.add(buscador, BorderLayout.NORTH);
 			tabla.add(scroll, BorderLayout.CENTER);
@@ -113,6 +133,8 @@ public class VentanaMascota extends JFrame {
 			
 		JPanel prado = new JPanel(new BorderLayout());
 		prado.setPreferredSize(new Dimension(250, 150));
+		prado.setBorder(BorderFactory.createMatteBorder(5, 0, 0, 0, new Color(168, 154, 140)));
+		prado.setBackground(new Color(210, 227, 209));
 			prado.add(mascota);
 			mascota.setSize(100, 100);
 			Thread movimientoMascota = new Thread(() -> {
@@ -129,11 +151,12 @@ public class VentanaMascota extends JFrame {
 			pPrincipal.add(prado, BorderLayout.SOUTH);
 		
 		this.setSize(960, 600);
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
 
 	protected void filtrar() {
+		//TODO: Terminar
 		String f = txtFiltro.getText().toLowerCase();
 		
 		this.modeloDatosMercado.setRowCount(0);
@@ -151,5 +174,16 @@ public class VentanaMascota extends JFrame {
 		Vector<String> cabeceraMercado = new Vector<String>(Arrays.asList( "NOMBRE", "BENEFICIA", "PRECIO", "ALMACEN"));
 		this.modeloDatosMercado = new DefaultTableModel(new Vector<Vector<Object>>(), cabeceraMercado);
 		this.mercadillo = new JTable(this.modeloDatosMercado);
+
+		TableCellRenderer tcr = new TableCellRenderer() {
+			
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+					int row, int column) {
+				JLabel result = new JLabel(value.toString());
+				return result;
+			}
+		};
+		mercadillo.setDefaultRenderer(Object.class, tcr);
 	}
 }
