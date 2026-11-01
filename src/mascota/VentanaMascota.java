@@ -18,6 +18,9 @@ public class VentanaMascota extends JFrame {
 	JTable mercadillo;
 	private DefaultTableModel modeloDatosMercado;
 	private JTextField txtFiltro;
+	JPanel prado = new JPanel(new GridLayout(2, 1));
+	Image imagen = Ventana.getM().getImagen().getImage().getScaledInstance(100, 100,Image.SCALE_SMOOTH);
+	JLabel mascota = new JLabel(new ImageIcon(imagen));
 	
 	public VentanaMascota() {
 		JPanel pPrincipal = new JPanel(new BorderLayout());
@@ -127,26 +130,14 @@ public class VentanaMascota extends JFrame {
 		JPanel pInfo =new JPanel();
 			pInfo.add(new JLabel("Información sobre tu mascota"));
 			content.add(pInfo, "INFO");
-			
-		Image imagen = Ventana.getM().getImagen().getImage().getScaledInstance(100, 100,Image.SCALE_SMOOTH);
-			JLabel mascota = new JLabel(new ImageIcon(imagen));
-			
-		JPanel prado = new JPanel(new BorderLayout());
+
+
 		prado.setPreferredSize(new Dimension(250, 150));
 		prado.setBorder(BorderFactory.createMatteBorder(5, 0, 0, 0, new Color(168, 154, 140)));
 		prado.setBackground(new Color(210, 227, 209));
 			prado.add(mascota);
 			mascota.setSize(100, 100);
-			Thread movimientoMascota = new Thread(() -> {
-				 while (true) {
-					 
-					 try {
-							Thread.sleep(500);
-						} catch (InterruptedException e) {
-						}
-					 
-				    }// TODO: Ordinaria año pasado
-			});
+			Saltitos movimientoMascota = new Saltitos();
 			movimientoMascota.start();
 			pPrincipal.add(prado, BorderLayout.SOUTH);
 		
@@ -155,6 +146,29 @@ public class VentanaMascota extends JFrame {
 		this.setVisible(true);
 	}
 
+	private class Saltitos extends Thread {   
+		
+		public void run() {
+
+            while (true) {
+            	arriba();
+            	
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {                   
+                	this.interrupt();
+                }
+                abajo();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                	this.interrupt();
+                }
+            }
+        }
+   
+	}
+	
 	protected void filtrar() {
 		//TODO: Terminar
 		String f = txtFiltro.getText().toLowerCase();
@@ -168,6 +182,26 @@ public class VentanaMascota extends JFrame {
 //
 //			}}
 		
+	}
+
+	public void abajo() {
+		SwingUtilities.invokeLater(() -> {
+			prado.removeAll();
+			prado.add(new JLabel());
+			prado.add(mascota);
+			prado.revalidate();
+			prado.repaint();
+		});
+	}
+
+	public void arriba() {
+		SwingUtilities.invokeLater(() -> {
+			prado.removeAll();
+			prado.add(mascota);
+			prado.add(new JLabel());
+			prado.revalidate();
+			prado.repaint();
+		});
 	}
 
 	private void initTables() {
