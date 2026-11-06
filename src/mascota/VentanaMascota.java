@@ -18,9 +18,9 @@ public class VentanaMascota extends JFrame {
 	JTable mercadillo;
 	private DefaultTableModel modeloDatosMercado;
 	private JTextField txtFiltro;
-	JPanel prado = new JPanel(new GridLayout(2, 1));
+	JPanel prado = new JPanel(new GridLayout(2, 9));
 	Image imagen = Ventana.getM().getImagen().getImage().getScaledInstance(100, 100,Image.SCALE_SMOOTH);
-	JLabel mascota = new JLabel(new ImageIcon(imagen));
+
 	
 	public VentanaMascota() {
 		JPanel pPrincipal = new JPanel(new BorderLayout());
@@ -91,11 +91,13 @@ public class VentanaMascota extends JFrame {
 		JPanel pMercado =new JPanel(new BorderLayout());
 			initTables();
 			JPanel tabla = new JPanel(new BorderLayout());
+			
 			this.mercadillo.setBackground(new Color(232, 224, 216));
 			mercadillo.getTableHeader().setBackground(new Color(168, 154, 140));
 			mercadillo.getTableHeader().setForeground(Color.WHITE);
 			mercadillo.getTableHeader().setFont(new Font("Segoe UI Symbol", Font.BOLD, 15));
 			mercadillo.setShowGrid(false);
+			
 			JScrollPane scroll = new JScrollPane(this.mercadillo);
 			scroll.getViewport().setBackground(new Color(232, 224, 216));
 			scroll.setBorder(BorderFactory.createEmptyBorder());
@@ -135,8 +137,17 @@ public class VentanaMascota extends JFrame {
 		prado.setPreferredSize(new Dimension(250, 150));
 		prado.setBorder(BorderFactory.createMatteBorder(5, 0, 0, 0, new Color(168, 154, 140)));
 		prado.setBackground(new Color(210, 227, 209));
-			prado.add(mascota);
-			mascota.setSize(100, 100);
+		for (int i = 0; i<9*2;i++) {
+			if (i%2!=0) {
+				JLabel mascota = new JLabel(new ImageIcon(imagen));
+				prado.add(mascota);
+				mascota.setSize(100, 100);
+				mascota.setVisible(false);
+			} else {
+				prado.add(new JLabel());
+			}
+			
+		}
 			Saltitos movimientoMascota = new Saltitos();
 			movimientoMascota.start();
 			pPrincipal.add(prado, BorderLayout.SOUTH);
@@ -151,19 +162,28 @@ public class VentanaMascota extends JFrame {
 		public void run() {
 
             while (true) {
-            	arriba();
-            	
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {                   
-                	this.interrupt();
-                }
-                abajo();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                	this.interrupt();
-                }
+            	for (int i = 0; i<9;i++) {
+            		int pos = (i%2==0)?i+9:i;
+            		Component componente = prado.getComponent(pos);
+            		componente.setVisible(true);
+            		 try {
+                         Thread.sleep(1000);
+                     } catch (InterruptedException e) {                   
+                     	this.interrupt();
+                     }
+            		 componente.setVisible(false);
+            	}
+            	for (int i = 8; i>0;i--) {
+            		int pos = (i%2==0)?i+9:i;
+            		Component componente = prado.getComponent(pos);
+            		componente.setVisible(true);
+            		 try {
+                         Thread.sleep(1000);
+                     } catch (InterruptedException e) {                   
+                     	this.interrupt();
+                     }
+            		 componente.setVisible(false);
+            	}
             }
         }
    
@@ -184,25 +204,6 @@ public class VentanaMascota extends JFrame {
 		
 	}
 
-	public void abajo() {
-		SwingUtilities.invokeLater(() -> {
-			prado.removeAll();
-			prado.add(new JLabel());
-			prado.add(mascota);
-			prado.revalidate();
-			prado.repaint();
-		});
-	}
-
-	public void arriba() {
-		SwingUtilities.invokeLater(() -> {
-			prado.removeAll();
-			prado.add(mascota);
-			prado.add(new JLabel());
-			prado.revalidate();
-			prado.repaint();
-		});
-	}
 
 	private void initTables() {
 		Vector<String> cabeceraMercado = new Vector<String>(Arrays.asList( "NOMBRE", "BENEFICIA", "PRECIO", "ALMACEN"));
