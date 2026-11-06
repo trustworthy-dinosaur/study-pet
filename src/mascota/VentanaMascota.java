@@ -9,6 +9,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import mascota.Item.Beneficio;
 import ventanaPrincipal.JButtonRound;
 import ventanaPrincipal.Ventana;
 
@@ -203,8 +204,49 @@ public class VentanaMascota extends JFrame {
 //			}}
 		
 	}
+	public static ArrayList<Item> crearItems() {
 
+        ArrayList<Item> items = new ArrayList<>();
 
+        // COMIDA - ESTÓMAGO
+        items.add(new Item("Churros", Beneficio.ESTOMAGO, 2, 0));
+        items.add(new Item("Pescado", Beneficio.ESTOMAGO, 3, 0));
+        items.add(new Item("Sushi", Beneficio.ESTOMAGO, 4, 0));
+        items.add(new Item("Tortilla de patata", Beneficio.ESTOMAGO, 3, 0));
+        items.add(new Item("Pizza", Beneficio.ESTOMAGO, 4, 0));
+        items.add(new Item("Manzana", Beneficio.ESTOMAGO, 1, 0));
+        items.add(new Item("Galletas", Beneficio.ESTOMAGO, 2, 0));
+        items.add(new Item("Hamburguesa", Beneficio.ESTOMAGO, 5, 0));
+        items.add(new Item("Zanahoria", Beneficio.ESTOMAGO, 1, 0));
+        items.add(new Item("Tarta", Beneficio.ESTOMAGO, 4, 0));
+
+        // ENTRETENIMIENTO - FELICIDAD
+        items.add(new Item("Pelota", Beneficio.FELICIDAD, 2, 0));
+        items.add(new Item("Peluche", Beneficio.FELICIDAD, 3, 0));
+        items.add(new Item("Teléfono", Beneficio.FELICIDAD, 5, 0));
+        items.add(new Item("Videojuego", Beneficio.FELICIDAD, 4, 0));
+        items.add(new Item("Cometa", Beneficio.FELICIDAD, 2, 0));
+        items.add(new Item("Libro de aventuras", Beneficio.FELICIDAD, 3, 0));
+        items.add(new Item("Patinete", Beneficio.FELICIDAD, 5, 0));
+        items.add(new Item("Guitarra", Beneficio.FELICIDAD, 4, 0));
+        items.add(new Item("Burbujas", Beneficio.FELICIDAD, 1, 0));
+        items.add(new Item("Disfraz", Beneficio.FELICIDAD, 3, 0));
+
+        // ENERGÍA
+        items.add(new Item("Café", Beneficio.ENERGIA, 2, 0));
+        items.add(new Item("Almohada", Beneficio.ENERGIA, 3, 0));
+        items.add(new Item("Manta", Beneficio.ENERGIA, 2, 0));
+        items.add(new Item("Siesta", Beneficio.ENERGIA, 1, 0));
+        items.add(new Item("Té", Beneficio.ENERGIA, 2, 0));
+        items.add(new Item("Cama pequeña", Beneficio.ENERGIA, 5, 0));
+        items.add(new Item("Zapatillas", Beneficio.ENERGIA, 3, 0));
+        items.add(new Item("Reloj despertador", Beneficio.ENERGIA, 4, 0));
+        items.add(new Item("Música relajante", Beneficio.ENERGIA, 2, 0));
+        items.add(new Item("Batido de frutas", Beneficio.ENERGIA, 3, 0));
+
+        return items;
+    }
+	//hecho con IA
 	private void initTables() {
 		Vector<String> cabeceraMercado = new Vector<String>(Arrays.asList( "NOMBRE", "BENEFICIA", "PRECIO", "ALMACEN"));
 		this.modeloDatosMercado = new DefaultTableModel(new Vector<Vector<Object>>(), cabeceraMercado);
