@@ -25,6 +25,7 @@ import javax.swing.JProgressBar;
 import javax.swing.Timer;
 import mascota.Mascota;
 import mascota.VentanaMascota;
+import stats.VentanaStats;
 
 public class Ventana extends JFrame{
 	public static Mascota m = new Mascota();

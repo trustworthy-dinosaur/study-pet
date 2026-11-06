@@ -1,4 +1,4 @@
-package ventanaPrincipal;
+package stats;
 
 import java.awt.GridLayout;
 
@@ -16,7 +16,7 @@ public class VentanaStats extends JFrame {
 		
 		pPrincipal.add(new JLabel("Stats - Nerea"));
 		
-		
+	
 		
 		
 		
