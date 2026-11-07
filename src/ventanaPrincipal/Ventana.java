@@ -23,6 +23,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.Timer;
+
+import horario.VentanaHorario;
 import mascota.Mascota;
 import mascota.VentanaMascota;
 import stats.VentanaStats;
@@ -224,11 +226,12 @@ public class Ventana extends JFrame{
 				gbc1.weighty = 0.2;
 				pGreetings.add(pHoli, gbc1);
 			
-			JPanelRound pNotas = new JPanelRound();
-				pNotas.setBackground(new Color(152, 151, 105));
-				gbc1.gridy = 2;
-				gbc1.weighty = 0.6;
-				pGreetings.add(pNotas, gbc1);
+			JPanelRound pNotas = new JPanelRound(new BorderLayout());
+			pNotas.setBackground(new Color(152, 151, 105));
+			pNotas.add(new PanelTareas(), BorderLayout.CENTER);
+			gbc1.gridy = 2;
+			gbc1.weighty = 0.6;
+			pGreetings.add(pNotas, gbc1);
 			
 			
 			//Para no alterar tamaños

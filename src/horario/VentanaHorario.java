@@ -1,4 +1,4 @@
-package ventanaPrincipal;
+package horario;
 
 import java.awt.GridLayout;
 
