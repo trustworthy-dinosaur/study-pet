@@ -2,18 +2,19 @@ package stats;
 
 import java.util.List;
 
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.AbstractTableModel;
 
-public class statsmodelo extends DefaultTableModel{
+
+public class statsmodelo extends AbstractTableModel{
 	
 	
-	private String [] columnanombre = {"Lunes", "Martes", "Miércoles","Jueves", "Viernes", "Sábado", "Domingo"};
-	private List<String> asignaturas; 
+	private String [] columnanombre = {"Lunes", "Martes", "Miércoles","Jueves", "Viernes", "Sábado", "Domingo", "Total Semanal", "Tiempo"};
+	private String [] asignaturas = {"Matemáticas", "Lengua", "Ingles", "Biología"};
 	
 	
 	@Override 
 	public int getRowCount() {
-		
+		return asignaturas.length;
 	}
 	
 	@Override
@@ -22,8 +23,8 @@ public class statsmodelo extends DefaultTableModel{
 	}
 	
 	@Override
-	public String getColumnName() {
-		
+	public String getColumnName(int c) {
+		return columnanombre[c];
 	}
 	
 	@Override
@@ -31,5 +32,9 @@ public class statsmodelo extends DefaultTableModel{
 		return false;
 	}
 	
+	@Override
+	public Object getValueAt(int r, int c) {
+		return 0;
+	}
 	
 }
