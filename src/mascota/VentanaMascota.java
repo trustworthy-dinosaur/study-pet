@@ -95,10 +95,6 @@ public class VentanaMascota extends JFrame {
 			JPanel tabla = new JPanel(new BorderLayout());
 			
 			this.mercadillo.setBackground(new Color(232, 224, 216));
-			mercadillo.getTableHeader().setBackground(new Color(168, 154, 140));
-			mercadillo.getTableHeader().setForeground(Color.WHITE);
-			mercadillo.getTableHeader().setFont(new Font("Segoe UI Symbol", Font.BOLD, 15));
-			mercadillo.setShowGrid(false);
 			
 			JScrollPane scroll = new JScrollPane(this.mercadillo);
 			scroll.getViewport().setBackground(new Color(232, 224, 216));
@@ -251,13 +247,29 @@ public class VentanaMascota extends JFrame {
 		crearItems();
 		MercadoModelo mercadilloModelo = new MercadoModelo(items);
 		this.mercadillo = new JTable(mercadilloModelo);
-
+		mercadillo.setRowHeight(30);
+		mercadillo.setGridColor(new Color(168, 154, 140));
+		mercadillo.getTableHeader().setBackground(new Color(168, 154, 140));
+		mercadillo.getTableHeader().setForeground(Color.WHITE);
+		mercadillo.getTableHeader().setFont(new Font("Segoe UI Symbol", Font.BOLD, 15));
+		mercadillo.getColumnModel().getColumn(2).setMaxWidth(70);
+		mercadillo.getColumnModel().getColumn(3).setPreferredWidth(100);
+		mercadillo.getColumnModel().getColumn(3).setMaxWidth(100);;
 		TableCellRenderer tcr = new TableCellRenderer() {
 			
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 					int row, int column) {
-				JLabel result = new JLabel(value.toString());
+				JLabel result = new JLabel(value.toString(), JLabel.CENTER);
+				result.setForeground(new Color(111, 93, 79));
+				result.setFont(new Font("Segoe UI Symbol", NORMAL, 20));
+				
+				if (isSelected) {
+					result.setBackground(new Color(111, 93, 79));
+					result.setForeground(new Color(232, 224, 216));
+					result.setOpaque(true);
+				}
+				
 				return result;
 			}
 		};
