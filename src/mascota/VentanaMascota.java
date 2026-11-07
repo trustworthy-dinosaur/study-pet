@@ -17,13 +17,14 @@ public class VentanaMascota extends JFrame {
 
 	private static final long serialVersionUID = 7975229772580650805L;
 	JTable mercadillo;
-	private DefaultTableModel modeloDatosMercado;
 	private JTextField txtFiltro;
 	JPanel prado = new JPanel(new GridLayout(2, 9));
 	Image imagen = Ventana.getM().getImagen().getImage().getScaledInstance(100, 100,Image.SCALE_SMOOTH);
-
+	static ArrayList<Item> items = new ArrayList<>();
 	
 	public VentanaMascota() {
+		initTables();
+		
 		JPanel pPrincipal = new JPanel(new BorderLayout());
 		pPrincipal.setBackground(new Color(207, 196, 186));
 		this.getContentPane().add(pPrincipal);
@@ -194,8 +195,6 @@ public class VentanaMascota extends JFrame {
 		//TODO: Terminar
 		String f = txtFiltro.getText().toLowerCase();
 		
-		this.modeloDatosMercado.setRowCount(0);
-		
 //		for (Comic c : this.comics) {
 //			if (c.getTitulo().toLowerCase().contains(f)) {
 //				this.modeloDatosComics.addRow(
@@ -204,9 +203,10 @@ public class VentanaMascota extends JFrame {
 //			}}
 		
 	}
+	
 	public static ArrayList<Item> crearItems() {
-
-        ArrayList<Item> items = new ArrayList<>();
+		//hecho con IA
+        
 
         // COMIDA - ESTÓMAGO
         items.add(new Item("Churros", Beneficio.ESTOMAGO, 2, 0));
@@ -246,11 +246,11 @@ public class VentanaMascota extends JFrame {
 
         return items;
     }
-	//hecho con IA
+	
 	private void initTables() {
-		Vector<String> cabeceraMercado = new Vector<String>(Arrays.asList( "NOMBRE", "BENEFICIA", "PRECIO", "ALMACEN"));
-		this.modeloDatosMercado = new DefaultTableModel(new Vector<Vector<Object>>(), cabeceraMercado);
-		this.mercadillo = new JTable(this.modeloDatosMercado);
+		crearItems();
+		MercadoModelo mercadilloModelo = new MercadoModelo(items);
+		this.mercadillo = new JTable(mercadilloModelo);
 
 		TableCellRenderer tcr = new TableCellRenderer() {
 			
