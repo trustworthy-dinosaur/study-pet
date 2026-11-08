@@ -16,7 +16,21 @@ public class Asignaturasemana {
 		this.horatotal = horatotal;
 		this.porcentaje = porcentaje;
 	}
-
+	
+	public void calcularHoraToal() {
+		int suma = 0;
+		for (int i = 0; i < horas.length; i++) {
+			suma = suma + horas[i];
+		}
+		
+		this.horatotal = suma;
+	}
+	
+	public void porcentajetotal(int sumatotalhorasasignatura) {
+		this.porcentaje = (int) (((double)this.horatotal/sumatotalhorasasignatura) * 100);
+	}
+	
+	
 	public String getNombre() {
 		return nombre;
 	}

@@ -1,7 +1,13 @@
 package stats;
 
-public class statsdia extends AsbtractTableModel{
+import javax.swing.table.DefaultTableModel;
 
+public class statsdia extends DefaultTableModel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String [] columnas = {"Materia", "Horas", "Porcentaje "};
 	
 	@Override
@@ -11,7 +17,17 @@ public class statsdia extends AsbtractTableModel{
 	
 	@Override 
 	public int gerColumnCount(int c ) {
-		return c;
+		return columnas.length;
+	}
+	
+	@Override 
+	public String getColumnName(int c) {
+		return columnas[c];
+	}
+	
+	@Override
+	public boolean isCellEditable() {
+		return false;
 	}
 	
 	
