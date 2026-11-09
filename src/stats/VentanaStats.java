@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
@@ -29,7 +30,7 @@ public class VentanaStats extends JFrame {
 	
 	public VentanaStats() {
 		
-		//IA
+		//Uso de IA
 		asignaturas.add(new Asignaturasemana("Matemáticas", new int[]{2, 2, 0, 2, 0, 0, 0}, 0, 0));
 		asignaturas.add(new Asignaturasemana("Programación", new int[]{0, 3, 3, 0, 2, 0, 0}, 0, 0));
 		asignaturas.add(new Asignaturasemana("Bases de Datos", new int[]{2, 0, 2, 2, 0, 0, 0}, 0, 0));
@@ -95,10 +96,10 @@ public class VentanaStats extends JFrame {
 		JPanel card = new JPanel(layoutcard);
 		
 		centro.add(card, BorderLayout.CENTER);
-		card.add(CrearJTables(), "Vista General");
+		card.add(VistaGeneralBarras(), "Vista General");
 		card.add(CrearJTables(), "Vista Detallada");
 		
-		JButton botongeneral = new JButton("Vista General");
+		JButton botongeneral = new JButton("Vista General Semana");
 		botongeneral.addActionListener( e-> {
 			layoutcard.show(card, "Vista General");
 		});
@@ -150,8 +151,69 @@ public class VentanaStats extends JFrame {
 	}
 	
 	private JPanel VistaGeneralBarras() {
+		//Panel principal dos graficos
+		JPanel dosgrid = new JPanel(new GridLayout(1,2));
+		
+		//Crear para poner Label de titulo norte y centro el panel general grafico. EL IZQUIERDO
+		JPanel generalizqui = new JPanel(new BorderLayout());
+		JLabel semana = new JLabel("Gráfico Horas Total", JLabel.CENTER);
+		semana.setPreferredSize(new Dimension(0, 70));
+		generalizqui.add(semana, BorderLayout.NORTH);
 		
 		
+		//EL GRÁFICO DERECHO CREAR
+		
+		//Crear general panel para  asignatura (gráfico, nombres...) Derecho
+		JPanel panelasig = new JPanel(new BorderLayout());
+		
+		
+		//Crear grafico por asignatura por semana
+		JPanel flowbarrasasig = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
+		
+		for(Asignaturasemana asig: asignaturas) {
+			JProgressBar barra = new JProgressBar(JProgressBar.VERTICAL,0,100);
+			barra.setValue(asig.getHoratotal());
+			barra.setPreferredSize(new Dimension(40,270));
+			flowbarrasasig.add(barra);
+		}
+		
+		panelasig.add(flowbarrasasig, BorderLayout.CENTER);
+		
+		// EL PANEL DERECHO
+		JPanel panelderecho = new JPanel(new BorderLayout());
+		JLabel textoasig = new JLabel("Gráfico Horas Asignatura", JLabel.CENTER);
+		textoasig.setPreferredSize(new Dimension(0, 70));
+		panelderecho.add(textoasig, BorderLayout.NORTH);
+		panelderecho.add(panelasig, BorderLayout.CENTER);
+		
+		
+		
+		//EL PANEL IZQUIERDO
+		
+		//Creamos el grafico por semana
+		JPanel panelsemana = new JPanel(new BorderLayout());
+		JPanel barrasflow = new JPanel(new FlowLayout(FlowLayout.CENTER, 90, 50));
+		
+		for (int i = 0; i < 7; i++) {
+			
+		
+			
+			
+			JProgressBar barra = new JProgressBar(JProgressBar.VERTICAL, 0, 200);
+			//barra.setValue(asig.porcentajetotal());
+			barra.setPreferredSize(new Dimension(30,200));
+			barrasflow.add(barra);
+		
+		}
+		
+		 panelsemana.add(barrasflow, BorderLayout.SOUTH);
+		 
+		 
+		 dosgrid.add(generalizqui);
+		 dosgrid.add(panelderecho);
+		 
+		 
+		 return dosgrid;
 		
 	}
 	
