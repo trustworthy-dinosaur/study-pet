@@ -13,12 +13,41 @@ import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelTareas extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
 	private Color colorTexto = new Color(152, 151, 105).darker().darker();
+	
+	private Color colorIcono = new Color(152, 151, 105).darker(); //same dark green as the ⛶
+
+	private JButton crearBoton(String texto) {
+		JButton boton = new JButton(texto);
+		boton.setFont(new Font("Segoe UI Symbol", Font.BOLD, 22));
+		boton.setForeground(colorIcono);
+		boton.setMargin(new Insets(0, 8, 0, 8));
+		boton.setFocusPainted(false);
+		boton.setContentAreaFilled(false);
+		boton.setBorderPainted(false);
+		boton.setOpaque(false);
+
+		boton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				boton.setForeground(Color.BLACK);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				boton.setForeground(colorIcono);
+			}
+		});
+		return boton;
+	}
+	
 	private JPanel listaTareas;
 
 	public PanelTareas() {
@@ -26,9 +55,7 @@ public class PanelTareas extends JPanel {
 		this.setOpaque(false);
 		this.setBorder(BorderFactory.createEmptyBorder(5, 15, 15, 10));
 
-		JButton botonNuevaTarea = new JButton("+");
-		botonNuevaTarea.setMargin(new Insets(0, 8, 0, 8));
-		botonNuevaTarea.setFocusPainted(false);
+		JButton botonNuevaTarea = crearBoton("+");
 		
 		botonNuevaTarea.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -36,7 +63,7 @@ public class PanelTareas extends JPanel {
 			}
 		});
 
-		JPanel arriba = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JPanel arriba = new JPanel(new FlowLayout(FlowLayout.RIGHT, -19, -3));
 		arriba.setOpaque(false);
 		arriba.add(botonNuevaTarea);
 		this.add(arriba, BorderLayout.NORTH);
@@ -71,9 +98,7 @@ public class PanelTareas extends JPanel {
 		check.setOpaque(false);
 		check.setForeground(colorTexto);
 
-		JButton borrar = new JButton("x");
-		borrar.setMargin(new Insets(0, 8, 0, 8));
-		borrar.setFocusPainted(false);
+		JButton borrar = crearBoton("x");
 		borrar.setVisible(false);
 
 		check.addActionListener(new ActionListener() {
@@ -96,14 +121,12 @@ public class PanelTareas extends JPanel {
 			}
 		}
 		);
-		
 
 		fila.add(check, BorderLayout.CENTER);
 		fila.add(borrar, BorderLayout.EAST);
 		listaTareas.add(fila);
 		listaTareas.revalidate();
 		listaTareas.repaint();
-		
 		
 		
 	}

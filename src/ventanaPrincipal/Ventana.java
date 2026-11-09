@@ -30,8 +30,10 @@ import mascota.VentanaMascota;
 import stats.VentanaStats;
 
 public class Ventana extends JFrame{
+	public static Ventana ventana;
 	public static Mascota m = new Mascota();
 	private JLabel lFechaHora;
+	
 
 	private static final long serialVersionUID = -4737376985574446318L;
 
@@ -69,6 +71,7 @@ public class Ventana extends JFrame{
 	}
 
 	public Ventana() {
+		ventana = this;
 		JPanel pPrincipal = new JPanel(new GridLayout(1, 3, 20, 20));
 		this.getContentPane().add(pPrincipal);
 
@@ -174,6 +177,7 @@ public class Ventana extends JFrame{
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						super.mouseClicked(e);
+						Ventana.this.setVisible(false);
 						new VentanaHorario();
 					}
 					
