@@ -31,6 +31,7 @@ import stats.VentanaStats;
 
 public class Ventana extends JFrame{
 	public static Mascota m = new Mascota();
+	private JLabel lFechaHora;
 
 	private static final long serialVersionUID = -4737376985574446318L;
 
@@ -50,6 +51,20 @@ public class Ventana extends JFrame{
 			return "Buenas tardes";
 		} else {
 			return "Buenas noches";
+		}
+	}
+	
+	private class Reloj extends Thread {
+		public void run() {
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy  HH:mm:ss");
+			while (true) {
+				lFechaHora.setText(formato.format(new Date()));
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					this.interrupt();
+				}
+			}
 		}
 	}
 
@@ -180,29 +195,21 @@ public class Ventana extends JFrame{
 				
 				pTime.add(eTime, BorderLayout.NORTH);
 				
-				JLabel lFechaHora = new JLabel("",JLabel.CENTER);
-				lFechaHora.setFont(new Font("Dubai Medium", Font.BOLD, 22));
+				lFechaHora = new JLabel("",JLabel.CENTER);
+				lFechaHora.setFont(new Font("Bell MT", Font.BOLD, 22));
 				lFechaHora.setForeground(pTime.getBackground().darker().darker());
+				lFechaHora.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 				pTime.add(lFechaHora, BorderLayout.CENTER);
 
-				SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy  HH:mm:ss");
-
-				Timer timerReloj =new Timer(1000, new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						lFechaHora.setText(formato.format(new Date()));
-					}
-				});
-				
-				timerReloj.setInitialDelay(0);
-				timerReloj.start();
+				Reloj reloj = new Reloj();
+				reloj.start();
 				
 				gbc1.gridy = 0;
 				gbc1.weighty = 0.2;
 				pGreetings.add(pTime, gbc1);
-				
+	
 				
 				// saludo que va cambiando según la hora del del día
-				
 				JPanelRound pHoli = new JPanelRound(new BorderLayout());
 				pHoli.setOpaque(false);
 				final JLabel holi = new JLabel(saludo(), JLabel.CENTER);
