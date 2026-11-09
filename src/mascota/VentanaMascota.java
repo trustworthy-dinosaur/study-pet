@@ -33,6 +33,7 @@ public class VentanaMascota extends JFrame {
 			pPrincipal.add(pTitulo, BorderLayout.NORTH);
 			pTitulo.setOpaque(false);
 		
+			
 		JLabel back = new JLabel("🔙");
 			pTitulo.add(back, BorderLayout.WEST);
 			back.setFont(new Font("Segoe UI Symbol", NORMAL, 30));
