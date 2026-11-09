@@ -8,7 +8,7 @@ public class MercadoModelo extends DefaultTableModel{
 
 	private static final long serialVersionUID = 1L;
 	private List<Item> items = new ArrayList<Item>();
-	private String[] cname = {"NOMBRE", "BENEFICIA", "PRECIO", "ALMACEN"};
+	private String[] cname = {"NOMBRE", "BENEFICIA", "PRECIO", "ALMACEN", "COMPRAR"};
 
 	public MercadoModelo(List<Item> items) {
 		this.items = items;
@@ -29,7 +29,7 @@ public class MercadoModelo extends DefaultTableModel{
 	
 	@Override
 	public int getColumnCount() {
-		return 4;
+		return cname.length;
 	}
 	
 	@Override
@@ -48,6 +48,8 @@ public class MercadoModelo extends DefaultTableModel{
 			return it.getPrecio();
 		} else if (column==3) {
 			return it.getAlmacen();
+		} else if (column == 4) {
+			return "+";
 		}
 		return "no existe";
 	}

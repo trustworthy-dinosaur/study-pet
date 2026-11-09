@@ -8,7 +8,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
-
 import mascota.Item.Beneficio;
 import ventanaPrincipal.JButtonRound;
 import ventanaPrincipal.Ventana;
@@ -21,10 +20,10 @@ public class VentanaMascota extends JFrame {
 	JPanel prado = new JPanel(new GridLayout(2, 9));
 	Image imagen = Ventana.getM().getImagen().getImage().getScaledInstance(100, 100,Image.SCALE_SMOOTH);
 	static ArrayList<Item> items = new ArrayList<>();
+	MercadoModelo mercadilloModelo;
 	
 	public VentanaMascota() {
-		initTables();
-		
+
 		JPanel pPrincipal = new JPanel(new BorderLayout());
 		pPrincipal.setBackground(new Color(207, 196, 186));
 		this.getContentPane().add(pPrincipal);
@@ -191,11 +190,11 @@ public class VentanaMascota extends JFrame {
 	protected void filtrar() {
 		//TODO: Terminar
 		String f = txtFiltro.getText().toLowerCase();
-		
-//		for (Comic c : this.comics) {
-//			if (c.getTitulo().toLowerCase().contains(f)) {
-//				this.modeloDatosComics.addRow(
-//						new Object[] {c.getId(), c.getEditorial(), c.getTitulo(), c.getPersonajes().size()} );
+
+//		for (Item i : items) {
+//			if (i.getNombre().toLowerCase().contains(f)) {
+//				this.mercadilloModelo.addRow(
+//						new Object[] {i.getNombre(), i.getBeneficio(), i.getPrecio(), i.getAlmacen()} );
 //
 //			}}
 		
@@ -246,7 +245,7 @@ public class VentanaMascota extends JFrame {
 	
 	private void initTables() {
 		crearItems();
-		MercadoModelo mercadilloModelo = new MercadoModelo(items);
+		mercadilloModelo = new MercadoModelo(items);
 		this.mercadillo = new JTable(mercadilloModelo);
 		mercadillo.setRowHeight(30);
 		mercadillo.setGridColor(new Color(168, 154, 140));
@@ -255,23 +254,37 @@ public class VentanaMascota extends JFrame {
 		mercadillo.getTableHeader().setFont(new Font("Segoe UI Symbol", Font.BOLD, 15));
 		mercadillo.getColumnModel().getColumn(2).setMaxWidth(70);
 		mercadillo.getColumnModel().getColumn(3).setPreferredWidth(100);
-		mercadillo.getColumnModel().getColumn(3).setMaxWidth(100);;
+		mercadillo.getColumnModel().getColumn(3).setMaxWidth(100);
+		mercadillo.getColumnModel().getColumn(4).setPreferredWidth(100);
+		mercadillo.getColumnModel().getColumn(4).setMaxWidth(100);
+		//TODO: Hacer que el boton funcione
 		TableCellRenderer tcr = new TableCellRenderer() {
 			
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 					int row, int column) {
 				JLabel result = new JLabel(value.toString(), JLabel.CENTER);
+				JPanel pResult = new JPanel(new GridBagLayout());
+				JButton btnResult = new JButton(value.toString());
+					pResult.add(btnResult);
+					pResult.setBackground(new Color(232, 224, 216));
+					btnResult.setBackground(new Color(111, 93, 79));
+					btnResult.setForeground(new Color(232, 224, 216));
+					
 				result.setForeground(new Color(111, 93, 79));
 				result.setFont(new Font("Segoe UI Symbol", NORMAL, 20));
-				
+
 				if (isSelected) {
 					result.setBackground(new Color(111, 93, 79));
 					result.setForeground(new Color(232, 224, 216));
+					pResult.setBackground(new Color(111, 93, 79));
+					pResult.setForeground(new Color(232, 224, 216));
+					btnResult.setBackground(new Color(232, 224, 216));
+					btnResult.setForeground(new Color(111, 93, 79));
 					result.setOpaque(true);
 				}
 				
-				return result;
+				return (column==4)?pResult:result;
 			}
 		};
 		mercadillo.setDefaultRenderer(Object.class, tcr);
