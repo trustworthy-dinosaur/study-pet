@@ -42,7 +42,7 @@ public class VentanaHorario extends JFrame {
 			pTitulo.add(back, BorderLayout.WEST);
 
 		JLabel titulo = new JLabel("Horario", JLabel.CENTER);
-			titulo.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 30));
+			titulo.setFont(new Font("Academy Engraved LET", Font.PLAIN, 30));
 			titulo.setForeground(new Color(74, 73, 51));
 			pTitulo.add(titulo, BorderLayout.CENTER);
 
