@@ -17,19 +17,34 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import ventanaPrincipal.Ventana;
+import java.awt.FlowLayout;
 
 public class VentanaHorario extends JFrame {
 	private static final long serialVersionUID = 6253219151150225472L;
 	private static DefaultTableModel modelo;
+	private JTable horario;
+	
+	// Constructor de la ventana
 	public VentanaHorario() {
 		JPanel pPrincipal = new JPanel(new BorderLayout());
-			pPrincipal.setBackground(new Color(226, 225, 196));
-			this.getContentPane().add(pPrincipal);
+		pPrincipal.setBackground(new Color(226, 225, 196));
+		this.getContentPane().add(pPrincipal);
 
+		JLabel papelera = new JLabel("🗑", JLabel.CENTER);
+		papelera.setFont(new Font("Arial", Font.PLAIN, 30));
+		papelera.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+					borrarTarea();
+				}
+			});
+		
+		
 		JPanel pTitulo = new JPanel(new BorderLayout());
-			pTitulo.setOpaque(false);
+		pTitulo.setOpaque(false);
 			pPrincipal.add(pTitulo, BorderLayout.NORTH);
 
+		// Botón de volver a la ventana principal
 		JLabel back = new JLabel("🔙");
 			back.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 30));
 			back.addMouseListener(new MouseAdapter() {
@@ -64,8 +79,13 @@ public class VentanaHorario extends JFrame {
 					mas.setForeground(new Color(74, 73, 51));
 				}
 			});
-			pTitulo.add(mas, BorderLayout.EAST);
-
+			
+			JPanel pBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+			pBotones.setOpaque(false);
+			pBotones.add(papelera);
+			pBotones.add(mas);
+			pTitulo.add(pBotones, BorderLayout.EAST);
+			
 		String[] columnas = {"Hora", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"};
 		modelo = new DefaultTableModel(columnas, 24) {
 			private static final long serialVersionUID = 1L;
@@ -78,7 +98,8 @@ public class VentanaHorario extends JFrame {
 		for (int i = 0; i < 24; i++) {
 			modelo.setValueAt(String.format("%02d:00", i), i, 0);
 		}
-		JTable horario = new JTable(modelo);
+		horario = new JTable(modelo);
+		horario.setCellSelectionEnabled(true);
 		horario.setRowHeight(44);
 			horario.setGridColor(new Color(152, 151, 105));
 			horario.setBackground(new Color(238, 237, 218));
@@ -134,9 +155,7 @@ public class VentanaHorario extends JFrame {
 	}
 
 	
-	// Hecho con IA
-	
-	// Pone un texto en una celda; si ya hay algo, lo junta con " / "
+	// Método auxiliar para poner una tarea en la tabla, combinando con lo que ya haya
 	private void ponerTarea(String texto, int columna, int fila) {
 		Object actual = modelo.getValueAt(fila, columna);
 		if (actual != null) {
@@ -251,7 +270,8 @@ public class VentanaHorario extends JFrame {
 		for (int h = 0; h < 24; h++) {
 			cbHora.addItem(String.format("%02d:00", h));
 		}
-
+		
+		
 		JPanel pForm = new JPanel(new GridLayout(3, 2, 5, 5));
 			pForm.add(new JLabel("Tarea:"));
 			pForm.add(txtTarea);
@@ -273,4 +293,25 @@ public class VentanaHorario extends JFrame {
 			modelo.setValueAt(texto, fila, columna);
 		}
 	}
+	
+	// Borrar una tarea del horario
+	private void borrarTarea() {
+		int fila = horario.getSelectedRow();
+		int columna = horario.getSelectedColumn();
+		if (fila < 0 || columna <= 0) {
+			JOptionPane.showMessageDialog(this, "Selecciona primero una celda con una tarea.");
+			return;
+		}
+		Object actual = modelo.getValueAt(fila, columna);
+		if (actual == null) {
+			JOptionPane.showMessageDialog(this, "Esa celda está vacía.");
+			return;
+		}
+		int opcion = JOptionPane.showConfirmDialog(this, "¿Borrar \"" + actual + "\"?",
+				"Borrar tarea", JOptionPane.YES_NO_OPTION);
+		if (opcion == JOptionPane.YES_OPTION) {
+			modelo.setValueAt(null, fila, columna);
+		}
+	}	
+	
 }
