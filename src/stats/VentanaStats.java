@@ -28,6 +28,8 @@ public class VentanaStats extends JFrame {
 	private static final long serialVersionUID = 702089359884714690L;
 	private List<Asignaturasemana> asignaturas = new ArrayList<>();
 	
+	
+	
 	public VentanaStats() {
 		
 		//Uso de IA
@@ -36,8 +38,11 @@ public class VentanaStats extends JFrame {
 		asignaturas.add(new Asignaturasemana("Bases de Datos", new int[]{2, 0, 2, 2, 0, 0, 0}, 0, 0));
 		asignaturas.add(new Asignaturasemana("Sistemas Informáticos", new int[]{3, 0, 2, 0, 2, 0, 0}, 0, 0));
 		asignaturas.add(new Asignaturasemana("Inglés Técnico", new int[]{0, 2, 0, 1, 0, 0, 0}, 0, 0));
-		//Hasta aquí
 		
+		
+
+		
+		//Hasta aquí
 		int horastotalsemanageneral = 0;
 		for(Asignaturasemana asigna: asignaturas) {
 			asigna.calcularHoraToal();
@@ -150,6 +155,8 @@ public class VentanaStats extends JFrame {
 		
 	}
 	
+		
+	
 	private JPanel VistaGeneralBarras() {
 		//Panel principal dos graficos
 		JPanel dosgrid = new JPanel(new GridLayout(1,2));
@@ -195,12 +202,9 @@ public class VentanaStats extends JFrame {
 		JPanel barrasflow = new JPanel(new FlowLayout(FlowLayout.CENTER, 90, 50));
 		
 		for (int i = 0; i < 7; i++) {
-			
-		
-			
-			
+				
 			JProgressBar barra = new JProgressBar(JProgressBar.VERTICAL, 0, 200);
-			//barra.setValue(asig.porcentajetotal());
+			barra.setValue(asig.porcentajetotal());
 			barra.setPreferredSize(new Dimension(30,200));
 			barrasflow.add(barra);
 		

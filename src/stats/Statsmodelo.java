@@ -17,6 +17,15 @@ public class Statsmodelo extends DefaultTableModel{
 		this.asignaturas = asignaturas; 
 	}
 	
+	public double getHorasTotalesDia(int c) {
+		double total = 0.0;
+		
+		for (int i = 0; i < getRowCount(); i++) {
+			Object hora = getValueAt(i, c);
+			total = total + (double) hora;
+		}
+		return total;
+	}
 	
 	@Override 
 	public int getRowCount() {
