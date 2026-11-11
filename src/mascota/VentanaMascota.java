@@ -188,7 +188,7 @@ public class VentanaMascota extends JFrame {
 	}
 	
 	protected void filtrar() {
-		//TODO: Terminar
+		//TODO: NO FUNCIONA
 		String f = txtFiltro.getText().toLowerCase();
 
 //		for (Item i : items) {
