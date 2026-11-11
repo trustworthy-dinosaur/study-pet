@@ -224,6 +224,7 @@ public class VentanaStats extends JFrame {
 		estadisticasemana.setRowHeight(35);
 		estadisticasemana.setBackground(new Color(241, 230, 224));
 		estadisticasemana.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+
 		JScrollPane scroll = new JScrollPane(estadisticasemana);
 			
 		

@@ -259,6 +259,14 @@ public class Ventana extends JFrame{
 		JPanelRound pStats = new JPanelRound(new BorderLayout(10,30));
 			pStats.setBackground(new Color(223, 147, 157));
 			
+			JPanel flowstat = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+			flowstat.setOpaque(false);
+			
+			JLabel estadistica = new JLabel("Estadísticas                         ", JLabel.CENTER);
+			estadistica.setForeground(Color.BLACK);
+			pStats.add(estadistica, BorderLayout.NORTH);
+			
+			flowstat.add(estadistica);
 			
 			
 			JPanel division = new JPanel(new GridLayout(2,1,5,5));
@@ -283,6 +291,14 @@ public class Ventana extends JFrame{
 			}
 			
 			division.add(cuadraditos);
+	
+			ImageIcon icon = new ImageIcon("images/images.png");
+			Image imagen1 = icon.getImage().getScaledInstance(200, 200,Image.SCALE_SMOOTH);
+			JLabel labelimagen = new JLabel(new ImageIcon(imagen1));
+			
+			division.add(cuadraditos);
+			
+			division.add(labelimagen);
 			
 			JLabel eStats = new JLabel("⛶", JLabel.RIGHT);
 			eStats.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 10));
@@ -309,8 +325,8 @@ public class Ventana extends JFrame{
 				}
 			});
 			
-		
-			pStats.add(eStats, BorderLayout.NORTH);
+			flowstat.add(eStats);
+			pStats.add(flowstat, BorderLayout.NORTH);
 			
 			
 			pStats.add(division, BorderLayout.CENTER);
