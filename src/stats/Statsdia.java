@@ -1,21 +1,21 @@
 package stats;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
-public class statsdia extends DefaultTableModel{
+public class Statsdia extends DefaultTableModel{
 	
 	private static final long serialVersionUID = 1L;
 	private String [] columnas = {"Horas", "Estudio", "Porcentaje"};
-	private Dia dia;
-	private List<CeldaHora> horacelda = dia.getTramos();
+	private List<CeldaHora> horacelda;
 	
-	public statsdia(List<CeldaHora> horacelda) {
+	public Statsdia(List<CeldaHora> horacelda) {
 		this.horacelda = horacelda;
 	}
 	
-	
+
 	@Override
 	public int getRowCount() {
 		if(horacelda == null) {

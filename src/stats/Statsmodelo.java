@@ -22,7 +22,7 @@ public class Statsmodelo extends DefaultTableModel{
 		
 		for (int i = 0; i < getRowCount(); i++) {
 			Object hora = getValueAt(i, c);
-			total = total + (double) hora;
+			total = total + (Integer) hora;
 		}
 		return total;
 	}
