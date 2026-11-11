@@ -49,7 +49,7 @@ public class MercadoModelo extends DefaultTableModel{
 		} else if (column==3) {
 			return it.getAlmacen();
 		} else if (column == 4) {
-			return "+";
+			return it;
 		}
 		return "no existe";
 	}

@@ -188,7 +188,7 @@ public class VentanaMascota extends JFrame {
 	}
 	
 	protected void filtrar() {
-		//TODO: Terminar
+		//TODO: NO FUNCIONA
 		String f = txtFiltro.getText().toLowerCase();
 
 //		for (Item i : items) {
@@ -265,11 +265,16 @@ public class VentanaMascota extends JFrame {
 					int row, int column) {
 				JLabel result = new JLabel(value.toString(), JLabel.CENTER);
 				JPanel pResult = new JPanel(new GridBagLayout());
-				JButton btnResult = new JButton(value.toString());
+				JButton btnResult = new JButton("+");
 					pResult.add(btnResult);
 					pResult.setBackground(new Color(232, 224, 216));
 					btnResult.setBackground(new Color(111, 93, 79));
 					btnResult.setForeground(new Color(232, 224, 216));
+					if (hasFocus && column ==4 ) {
+						Item it = (Item) value;
+						it.setAlmacen(it.getAlmacen()+1);
+					}
+					
 					
 				result.setForeground(new Color(111, 93, 79));
 				result.setFont(new Font("Segoe UI Symbol", NORMAL, 20));

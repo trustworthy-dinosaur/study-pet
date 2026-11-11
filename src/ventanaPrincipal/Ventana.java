@@ -120,16 +120,19 @@ public class Ventana extends JFrame{
 						JLabel pmHunger = new JLabel("Estómago");
 							pmStats.add(pmHunger);
 						JProgressBar pmpHunger = new JProgressBar();
+							pmpHunger.setValue(m.getEstomago());
 							pmStats.add(pmpHunger);
 
 						JLabel pmHappiness = new JLabel("Felicidad");
 							pmStats.add(pmHappiness);
 						JProgressBar pmpHappiness = new JProgressBar();
+							pmpHappiness.setValue(m.getFelicidad());
 							pmStats.add(pmpHappiness);
 							
 						JLabel pmEnergy = new JLabel("Energía");
 							pmStats.add(pmEnergy);
 						JProgressBar pmpEnergy = new JProgressBar();
+							pmpEnergy.setValue(m.getEnergia());
 							pmStats.add(pmpEnergy);
 					
 					JPanel pmGeneral = new JPanel(new BorderLayout());
