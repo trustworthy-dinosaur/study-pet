@@ -1,6 +1,10 @@
 package stats;
 
 import java.awt.BorderLayout;
+
+import javax.swing.table.DefaultTableCellRenderer; 
+import javax.swing.table.TableCellRenderer;  
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -25,9 +29,6 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
-
-import sun.jvm.hotspot.runtime.Threads;
-import sun.swing.table.DefaultTableCellHeaderRenderer;
 import ventanaPrincipal.Ventana;
 
 public class VentanaStats extends JFrame {
