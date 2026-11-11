@@ -132,8 +132,6 @@ public class VentanaStats extends JFrame {
 		
 	    
 	    
-	    
-	    
 		
 		//Panel base
 		JPanel pPrincipal = new JPanel(new BorderLayout());
@@ -342,9 +340,7 @@ public class VentanaStats extends JFrame {
 		return panelTablas;
 		
 		
-	}
-	
-		
+	}	
 	
 	private JPanel VistaGeneralBarras() {
 		
@@ -352,8 +348,7 @@ public class VentanaStats extends JFrame {
 	    List<Integer> valoresDerecha = new ArrayList<>();
 	    List<JProgressBar> barrasIzquierda = new ArrayList<>();
 	    List<Integer> valoresIzquierda = new ArrayList<>();
-		
-		
+
 		
 		//Panel principal dos graficos
 		JPanel dosgrid = new JPanel(new GridLayout(1,2));
