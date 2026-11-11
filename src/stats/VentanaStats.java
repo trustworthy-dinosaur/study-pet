@@ -224,6 +224,7 @@ public class VentanaStats extends JFrame {
 		estadisticasemana.setRowHeight(35);
 		estadisticasemana.setBackground(new Color(241, 230, 224));
 		estadisticasemana.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		estadisticasemana.getTableHeader().setReorderingAllowed(false);
 
 		JScrollPane scroll = new JScrollPane(estadisticasemana);
 			
@@ -277,10 +278,28 @@ public class VentanaStats extends JFrame {
 		tabladia.setRowHeight(25);
 		tabladia.setBackground(new Color(225,222,216));
 		tabladia.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		tabladia.getTableHeader().setReorderingAllowed(false);
 		JScrollPane scrolldia= new JScrollPane(tabladia);
 		
 		TitledBorder bordertit = BorderFactory.createTitledBorder(listaDias.get(0).getNombredia());
 		scrolldia.setBorder(bordertit);
+		
+		
+		TableCellRenderer rendererporcentaje = (table,value,isSelected, hasFocus,row,column) -> {
+			int valor = 0;
+			if(value instanceof Integer) {
+				valor = (Integer) value;
+			}
+			
+			JProgressBar barra = new JProgressBar(0,100);
+			barra.setValue(valor);
+			barra.setStringPainted(true);
+			barra.setString(valor + "%");
+			return barra;
+		};
+		tabladia.getColumnModel().getColumn(2).setCellRenderer(rendererporcentaje);
+		
+		
 		
 		
 		TableCellRenderer headerrenderer = (table, value, isSelected, hasFocus, row, column) -> {
@@ -295,22 +314,7 @@ public class VentanaStats extends JFrame {
 		 
 		tabladia.getTableHeader().setDefaultRenderer(headerrenderer);
 		
-		TableCellRenderer rendererporcentaje = (table,value,isSelected, hasFocus,row,column) -> {
-			int valor = 0;
-			if(value instanceof Integer) {
-				valor = (Integer) value;
-			}
-			
-			JProgressBar barra = new JProgressBar(0,100);
-			barra.setValue(valor);
-			barra.setStringPainted(true);
-			barra.setString(valor + "%");
-			
-			return barra;
-		};
-		
-		tabladia.getColumnModel().getColumn(2).setCellRenderer(rendererporcentaje);
-		
+	
 		
 		
 		estadisticasemana.getTableHeader().addMouseListener(new MouseAdapter() {
@@ -323,6 +327,20 @@ public class VentanaStats extends JFrame {
 					tabladia.setModel(new Statsdia(diaclick.getTramos()));
 					
 					bordertit.setTitle(diaclick.getNombredia());
+					TableCellRenderer rendererporcentaje = (table,value,isSelected, hasFocus,row,column) -> {
+						int valor = 0;
+						if(value instanceof Integer) {
+							valor = (Integer) value;
+						}
+						
+						JProgressBar barra = new JProgressBar(0,100);
+						barra.setValue(valor);
+						barra.setStringPainted(true);
+						barra.setString(valor + "%");
+						return barra;
+					};
+					tabladia.getColumnModel().getColumn(2).setCellRenderer(rendererporcentaje);
+					
 					
 					//pregunta IA de por qué no se me actualizaba el titulo y era por que no había puesto repaint()
 					scrolldia.repaint();
