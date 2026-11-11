@@ -2,6 +2,7 @@ package ventanaPrincipal;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
@@ -23,7 +24,7 @@ public class PanelTareas extends JPanel {
 
 	private Color colorTexto = new Color(152, 151, 105).darker().darker();
 	
-	private Color colorIcono = new Color(152, 151, 105).darker(); //same dark green as the ⛶
+	private Color colorIcono = new Color(152, 151, 105).darker();
 
 	private JButton crearBoton(String texto) {
 		JButton boton = new JButton(texto);
@@ -55,7 +56,9 @@ public class PanelTareas extends JPanel {
 		this.setOpaque(false);
 		this.setBorder(BorderFactory.createEmptyBorder(5, 15, 15, 10));
 
-		JButton botonNuevaTarea = crearBoton("+");
+		JButton botonNuevaTarea = crearBoton("Añadir tarea ");
+		botonNuevaTarea.setFont(new Font("Segoe UI Symbol", Font.BOLD, 15));
+		
 		
 		botonNuevaTarea.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -63,7 +66,7 @@ public class PanelTareas extends JPanel {
 			}
 		});
 
-		JPanel arriba = new JPanel(new FlowLayout(FlowLayout.RIGHT, -19, -3));
+		JPanel arriba = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		arriba.setOpaque(false);
 		arriba.add(botonNuevaTarea);
 		this.add(arriba, BorderLayout.NORTH);
