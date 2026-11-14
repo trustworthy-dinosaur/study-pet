@@ -28,6 +28,7 @@ import horario.VentanaHorario;
 import mascota.Mascota;
 import mascota.VentanaMascota;
 import stats.VentanaStats;
+import notas.VentanaNotas;
 
 public class Ventana extends JFrame{
 	public static Ventana ventana;
@@ -240,9 +241,49 @@ public class Ventana extends JFrame{
 				gbc1.weighty = 0.2;
 				pGreetings.add(pHoli, gbc1);
 			
-			JPanelRound pNotas = new JPanelRound(new BorderLayout());
-			pNotas.setBackground(new Color(152, 151, 105));
-			pNotas.add(new PanelTareas(), BorderLayout.CENTER);
+				JPanelRound pNotas = new JPanelRound();
+				pNotas.setLayout(new GridBagLayout());
+				
+				pNotas.setBackground(new Color(152, 151, 105));
+
+				JLabel eNotas = new JLabel("⛶", JLabel.RIGHT);
+				eNotas.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 10));
+				eNotas.setFont(new Font(getName(), Font.BOLD, 20));
+				eNotas.setForeground(pNotas.getBackground().darker());
+				eNotas.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						super.mouseClicked(e);
+						Ventana.this.setVisible(false);
+						new VentanaNotas();
+					}
+
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						super.mouseEntered(e);
+						eNotas.setForeground(Color.BLACK);
+					}
+
+					@Override
+					public void mouseExited(MouseEvent e) {
+						super.mouseExited(e);
+						eNotas.setForeground(pNotas.getBackground().darker());
+					}
+				});
+				GridBagConstraints gbcNotas = new GridBagConstraints();
+				gbcNotas.gridx = 0;
+				gbcNotas.gridy = 0;
+				gbcNotas.weightx = 1.0;
+				gbcNotas.weighty = 1.0;
+
+				gbcNotas.fill = GridBagConstraints.NONE;
+				gbcNotas.anchor = GridBagConstraints.NORTHEAST;
+				pNotas.add(eNotas, gbcNotas);
+
+				gbcNotas.fill = GridBagConstraints.BOTH;
+				pNotas.add(new PanelTareas(), gbcNotas);
+			
+			
 			gbc1.gridy = 2;
 			gbc1.weighty = 0.6;
 			pGreetings.add(pNotas, gbc1);
