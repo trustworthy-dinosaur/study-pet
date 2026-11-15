@@ -168,7 +168,7 @@ public class VentanaStats extends JFrame {
 		JPanel centro = new JPanel(new BorderLayout());
 		
 		pPrincipal.add(centro, BorderLayout.CENTER);
-	
+		
 	
 		
 		//Crear cardlayout
@@ -231,6 +231,8 @@ public class VentanaStats extends JFrame {
 		
 		
 		//Renderer celdas
+		
+		
 		TableCellRenderer porcentaje = (table,value,isSelected, hasFocus, row, column) -> {
 			int valor = 0;
 			if(value instanceof Integer) {
@@ -239,18 +241,35 @@ public class VentanaStats extends JFrame {
 			
 			JProgressBar barra = new JProgressBar(0,100);
 			barra.setValue(valor);
-			barra.setStringPainted(true);
 			barra.setString(valor + "%");
-			
+			barra.setBackground(new Color(242,206,217));
+			barra.setForeground(new Color(223,169,186));
+			barra.setStringPainted(true);
+			Border borde = BorderFactory.createLineBorder(new Color(237,235,230).darker());
+			barra.setBorder(borde);
 			return barra;
 		};
 
 		estadisticasemana.getColumnModel().getColumn(9).setCellRenderer(porcentaje);
 		
+		// Hecho con IA
+		TableCellRenderer textoancho = (table,value,isSelected, hasFocus, row, column) -> {
+			String texto = (value == null) ? "" : value.toString().replace("&", "&amp;");
+			int ancho = table.getColumnModel().getColumn(column).getWidth() - 30;
+			JLabel resultado = new JLabel("<html><div style='width:" + ancho + "px; text-align:center'>"
+					+ texto + "</div></html>", JLabel.CENTER);
+			return resultado;
+			
+		};
+		//Hasta aquí
+		
+		estadisticasemana.getColumnModel().getColumn(0).setCellRenderer(textoancho);
+	
+		
 		DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
 		centro.setHorizontalAlignment(JLabel.CENTER);
 		
-		for (int i = 0; i < estadisticasemana.getColumnCount()-1; i++) {
+		for (int i = 1; i < estadisticasemana.getColumnCount()-1; i++) {
 			estadisticasemana.getColumnModel().getColumn(i).setCellRenderer(centro);
 		}
 		
@@ -261,7 +280,7 @@ public class VentanaStats extends JFrame {
 		TableCellRenderer headerRenderer = (table, value, isSelected, hasFocus, row, column) -> {
 			JLabel result = new JLabel(value.toString());			
 			result.setHorizontalAlignment(JLabel.CENTER);
-			result.setBackground(new Color(233,229,219));
+			result.setBackground((new Color(241, 230, 224)));
 			result.setForeground(Color.BLACK);
 			result.setOpaque(true);
 			
@@ -283,6 +302,7 @@ public class VentanaStats extends JFrame {
 		
 		TitledBorder bordertit = BorderFactory.createTitledBorder(listaDias.get(0).getNombredia());
 		scrolldia.setBorder(bordertit);
+		
 		
 		
 		TableCellRenderer rendererporcentaje = (table,value,isSelected, hasFocus,row,column) -> {
@@ -325,9 +345,10 @@ public class VentanaStats extends JFrame {
 					int diaindice = cindice -1;
 					Dia diaclick = listaDias.get(diaindice);
 					tabladia.setModel(new Statsdia(diaclick.getTramos()));
+					bordertit.setTitle(diaclick.getNombredia());	
 					
-					bordertit.setTitle(diaclick.getNombredia());
-					TableCellRenderer rendererporcentaje = (table,value,isSelected, hasFocus,row,column) -> {
+					
+					TableCellRenderer rendererpor = (table,value,isSelected, hasFocus,row,column) -> {
 						int valor = 0;
 						if(value instanceof Integer) {
 							valor = (Integer) value;
@@ -337,9 +358,16 @@ public class VentanaStats extends JFrame {
 						barra.setValue(valor);
 						barra.setStringPainted(true);
 						barra.setString(valor + "%");
+						barra.setBackground(new Color(242,206,217));
+						barra.setForeground(new Color(223,169,186));
+						barra.setStringPainted(true);
+						Border borde = BorderFactory.createLineBorder(new Color(237,235,230).darker());
+						barra.setBorder(borde);
 						return barra;
 					};
-					tabladia.getColumnModel().getColumn(2).setCellRenderer(rendererporcentaje);
+					
+					tabladia.getColumnModel().getColumn(2).setCellRenderer(rendererpor);
+					
 					
 					
 					//pregunta IA de por qué no se me actualizaba el titulo y era por que no había puesto repaint()
@@ -350,6 +378,31 @@ public class VentanaStats extends JFrame {
 			}
 			
 		});
+		
+		
+		TableCellRenderer rendererpor = (table,value,isSelected, hasFocus,row,column) -> {
+			int valor = 0;
+			if(value instanceof Integer) {
+				valor = (Integer) value;
+			}
+			
+			JProgressBar barra = new JProgressBar(0,100);
+			barra.setValue(valor);
+			barra.setStringPainted(true);
+			barra.setString(valor + "%");
+			barra.setBackground(new Color(242,206,217));
+			barra.setForeground(new Color(223,169,186));
+			barra.setStringPainted(true);
+			Border borde = BorderFactory.createLineBorder(new Color(237,235,230).darker());
+			barra.setBorder(borde);
+			return barra;
+		};
+		
+		tabladia.getColumnModel().getColumn(2).setCellRenderer(rendererpor);
+		
+		
+		
+		
 		
 		
 		JPanel panelTablas = new JPanel(new GridLayout(2,1,0,10));
@@ -376,7 +429,8 @@ public class VentanaStats extends JFrame {
 		JPanel generalizqui = new JPanel(new BorderLayout());
 		JLabel semana = new JLabel("Gráfico Horas Total", JLabel.CENTER);
 		semana.setPreferredSize(new Dimension(0, 70));
-		generalizqui.setBackground(new Color(233,229,219));
+		generalizqui.setBackground(new Color(248, 245, 240));
+		generalizqui.setBorder(BorderFactory.createLineBorder(new Color(223,147,157).darker()));
 		generalizqui.add(semana, BorderLayout.NORTH);
 		
 		
@@ -385,7 +439,6 @@ public class VentanaStats extends JFrame {
 		
 		//Crear general panel para  asignatura (gráfico, nombres...) Derecho
 		JPanel panelasig = new JPanel(new BorderLayout());
-		
 		
 		//Crear grafico por asignatura por semana
 		JPanel flowbarra = new JPanel(new FlowLayout());
@@ -431,6 +484,7 @@ public class VentanaStats extends JFrame {
 		// EL PANEL DERECHO
 		JPanel panelderecho = new JPanel(new BorderLayout());
 		panelderecho.setBackground(new Color(225,222,216));
+		panelderecho.setBorder(BorderFactory.createLineBorder(new Color(223,147,157).darker()));
 		JLabel textoasig = new JLabel("Gráfico Horas Asignatura", JLabel.CENTER);
 		textoasig.setPreferredSize(new Dimension(0, 70));
 		panelderecho.add(textoasig, BorderLayout.NORTH);
@@ -443,7 +497,7 @@ public class VentanaStats extends JFrame {
 		//Creamos el grafico por semana
 		JPanel panelsemana = new JPanel(new BorderLayout());
 		JPanel barrasflow = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-		barrasflow.setBackground(new Color(233,229,219));
+		barrasflow.setBackground(new Color(248, 245, 240));
 		
 		for (int i = 1; i < 8; i++) {
 				
