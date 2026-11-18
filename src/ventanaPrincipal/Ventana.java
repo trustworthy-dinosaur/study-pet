@@ -23,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.Timer;
+import javax.swing.plaf.basic.BasicProgressBarUI;
 
 import horario.VentanaHorario;
 import mascota.Mascota;
@@ -156,6 +157,19 @@ public class Ventana extends JFrame{
 						pmGeneral.setOpaque(false);
 						pmGeneral.add(mascota, BorderLayout.NORTH);
 						pmGeneral.add(pmStats);
+						
+						// Cambiar color de las barras de progreso, IA
+						pmpHunger.setUI(new BasicProgressBarUI());
+						pmpHunger.setForeground(new Color(223, 147, 157));
+						pmpHunger.setBackground(new Color(90, 75, 65));
+
+						pmpHappiness.setUI(new BasicProgressBarUI());
+						pmpHappiness.setForeground(new Color(152, 151, 105));
+						pmpHappiness.setBackground(new Color(90, 75, 65));
+
+						pmpEnergy.setUI(new BasicProgressBarUI());
+						pmpEnergy.setForeground(new Color(245, 207, 155));
+						pmpEnergy.setBackground(new Color(90, 75, 65));	
 					
 				pMascot.add(eMascot, BorderLayout.NORTH);
 				pMascot.add(pmGeneral, BorderLayout.CENTER);
@@ -348,8 +362,8 @@ public class Ventana extends JFrame{
 			
 			division.add(cuadraditos);
 	
-			ImageIcon icon = new ImageIcon("images/images.png");
-			Image imagen1 = icon.getImage().getScaledInstance(200, 200,Image.SCALE_SMOOTH);
+			ImageIcon icon = new ImageIcon("images/imagen.png");
+			Image imagen1 = icon.getImage().getScaledInstance(250, 230,Image.SCALE_SMOOTH);
 			JLabel labelimagen = new JLabel(new ImageIcon(imagen1));
 			
 			division.add(cuadraditos);
