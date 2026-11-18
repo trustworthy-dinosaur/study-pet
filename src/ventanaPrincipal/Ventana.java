@@ -159,17 +159,17 @@ public class Ventana extends JFrame{
 						pmGeneral.add(pmStats);
 						
 						// Cambiar color de las barras de progreso, IA
-						pmpHunger.setUI(new BasicProgressBarUI());
-						pmpHunger.setForeground(new Color(223, 147, 157));
-						pmpHunger.setBackground(new Color(90, 75, 65));
-
-						pmpHappiness.setUI(new BasicProgressBarUI());
-						pmpHappiness.setForeground(new Color(152, 151, 105));
-						pmpHappiness.setBackground(new Color(90, 75, 65));
-
-						pmpEnergy.setUI(new BasicProgressBarUI());
-						pmpEnergy.setForeground(new Color(245, 207, 155));
-						pmpEnergy.setBackground(new Color(90, 75, 65));	
+//						pmpHunger.setUI(new BasicProgressBarUI());
+//						pmpHunger.setForeground(new Color(223, 147, 157));
+//						pmpHunger.setBackground(new Color(90, 75, 65));
+//
+//						pmpHappiness.setUI(new BasicProgressBarUI());
+//						pmpHappiness.setForeground(new Color(152, 151, 105));
+//						pmpHappiness.setBackground(new Color(90, 75, 65));
+//
+//						pmpEnergy.setUI(new BasicProgressBarUI());
+//						pmpEnergy.setForeground(new Color(245, 207, 155));
+//						pmpEnergy.setBackground(new Color(90, 75, 65));	
 					
 				pMascot.add(eMascot, BorderLayout.NORTH);
 				pMascot.add(pmGeneral, BorderLayout.CENTER);
