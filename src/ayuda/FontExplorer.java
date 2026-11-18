@@ -23,6 +23,7 @@ public class FontExplorer extends JFrame {
     public FontExplorer() {
         super("Explorador de fuentes Java");
 
+        
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(850, 600);
         setLocationRelativeTo(null);
