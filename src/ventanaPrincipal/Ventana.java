@@ -86,6 +86,7 @@ public class Ventana extends JFrame{
 	    }
 	    
 	    
+	    
 	    JPanel pPrincipal = new JPanel(new GridLayout(1, 3, 20, 20));
 		
 		this.getContentPane().add(pPrincipal);
