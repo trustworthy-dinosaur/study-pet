@@ -74,6 +74,7 @@ public class Ventana extends JFrame{
 	public Ventana() {
 		
 		ventana = this;
+		
 		ImageIcon iconoApp = new ImageIcon("images/icon.png");
 	    setIconImage(iconoApp.getImage());
 	    
@@ -83,6 +84,7 @@ public class Ventana extends JFrame{
 	            taskbar.setIconImage(iconoApp.getImage());
 	        }
 	    }
+	    
 	    
 	    JPanel pPrincipal = new JPanel(new GridLayout(1, 3, 20, 20));
 		
