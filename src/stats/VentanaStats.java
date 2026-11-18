@@ -39,9 +39,7 @@ public class VentanaStats extends JFrame {
 	
 	
 	public VentanaStats() {
-		
-		
-		
+	
 		//Uso de IA
 		asignaturas.add(new Asignaturasemana("Matemáticas", new int[]{2, 2, 0, 2, 0, 4, 0}, 0, 0));
 		asignaturas.add(new Asignaturasemana("Programación", new int[]{0, 3, 3, 0, 2, 0, 0}, 0, 0));
@@ -262,6 +260,7 @@ public class VentanaStats extends JFrame {
 			
 		};
 		//Hasta aquí
+		
 		
 		estadisticasemana.getColumnModel().getColumn(0).setCellRenderer(textoancho);
 	
