@@ -72,8 +72,20 @@ public class Ventana extends JFrame{
 	}
 
 	public Ventana() {
+		
 		ventana = this;
-		JPanel pPrincipal = new JPanel(new GridLayout(1, 3, 20, 20));
+		ImageIcon iconoApp = new ImageIcon("images/icon.png");
+	    setIconImage(iconoApp.getImage());
+	    
+	    if (java.awt.Taskbar.isTaskbarSupported()) {
+	        java.awt.Taskbar taskbar = java.awt.Taskbar.getTaskbar();
+	        if (taskbar.isSupported(java.awt.Taskbar.Feature.ICON_IMAGE)) {
+	            taskbar.setIconImage(iconoApp.getImage());
+	        }
+	    }
+	    
+	    JPanel pPrincipal = new JPanel(new GridLayout(1, 3, 20, 20));
+		
 		this.getContentPane().add(pPrincipal);
 
 		JPanel pMascotPomod = new JPanel(new GridBagLayout());
