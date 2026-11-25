@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import mascota.Item.Beneficio;
 import ventanaPrincipal.JButtonRound;
+import ventanaPrincipal.JPanelRound;
 import ventanaPrincipal.Ventana;
 
 public class VentanaMascota extends JFrame {
@@ -18,9 +19,12 @@ public class VentanaMascota extends JFrame {
 	JTable mercadillo;
 	private JTextField txtFiltro;
 	JPanel prado = new JPanel(new GridLayout(2, 9));
-	Image imagen = Ventana.getM().getImagen().getImage().getScaledInstance(100, 100,Image.SCALE_SMOOTH);
+	Mascota m = Ventana.getM();
+	Image imagen = m.getImagen().getImage().getScaledInstance(100, 100,Image.SCALE_SMOOTH);
 	static ArrayList<Item> items = new ArrayList<>();
 	MercadoModelo mercadilloModelo;
+	String fnac = "2024 - 45 - 34";
+	String nombreM = "Gary";
 	
 	public VentanaMascota() {
 
@@ -127,8 +131,49 @@ public class VentanaMascota extends JFrame {
 			pMercado.add(tabla, BorderLayout.CENTER);
 			content.add(pMercado, "MERCADO");
 			
-		JPanel pInfo =new JPanel();
-			pInfo.add(new JLabel("Información sobre tu mascota"));
+		JPanel pInfo =new JPanel(new GridLayout(1, 2));
+			pInfo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+			pInfo.setBackground(new Color(168, 154, 140));
+			
+			JPanelRound pmStats = new JPanelRound(new GridLayout(6, 1, 5, 5));
+			pmStats.setOpaque(false);
+			pmStats.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+			
+				JLabel pmHunger = new JLabel("Estómago");
+					pmStats.add(pmHunger);
+				JProgressBar pmpHunger = new JProgressBar();
+					pmpHunger.setValue(m.getEstomago());
+					pmStats.add(pmpHunger);
+	
+				JLabel pmHappiness = new JLabel("Felicidad");
+					pmStats.add(pmHappiness);
+				JProgressBar pmpHappiness = new JProgressBar();
+					pmpHappiness.setValue(m.getFelicidad());
+					pmStats.add(pmpHappiness);
+					
+				JLabel pmEnergy = new JLabel("Energía");
+					pmStats.add(pmEnergy);
+				JProgressBar pmpEnergy = new JProgressBar();
+					pmpEnergy.setValue(m.getEnergia());
+					pmStats.add(pmpEnergy);
+		
+			pInfo.add(pmStats);
+		
+			JPanel datos = new JPanel(new GridLayout(3,1));
+				datos.setOpaque(false);
+				datos.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+			
+				JLabel nom = new JLabel("Información sobre " + nombreM);
+				datos.add(nom);
+			
+				JLabel nac = new JLabel("FECHA DE NACIMIENTO : " + fnac);
+				datos.add(nac);
+				
+				JLabel mass = new JLabel("Y NO SE QUE MASS");
+				datos.add(mass);
+				
+			pInfo.add(datos);
+				
 			content.add(pInfo, "INFO");
 
 
@@ -188,7 +233,6 @@ public class VentanaMascota extends JFrame {
 	}
 	
 	protected void filtrar() {
-		//TODO: NO FUNCIONA
 		ArrayList<Item> items2 = new ArrayList<>();
 		String f = txtFiltro.getText().toLowerCase();
 		this.mercadilloModelo.setRowCount(0);
@@ -202,8 +246,6 @@ public class VentanaMascota extends JFrame {
 	
 	public static ArrayList<Item> crearItems() {
 		//hecho con IA
-        
-
         // COMIDA - ESTÓMAGO
         items.add(new Item("Churros", Beneficio.ESTOMAGO, 2, 0));
         items.add(new Item("Pescado", Beneficio.ESTOMAGO, 3, 0));

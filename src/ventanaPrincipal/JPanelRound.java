@@ -3,6 +3,7 @@ package ventanaPrincipal;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
@@ -18,6 +19,11 @@ public class JPanelRound extends JPanel{
 	
     public JPanelRound(BorderLayout borderLayout) {
     	super(borderLayout);
+    	setOpaque(false);
+	}
+
+	public JPanelRound(GridLayout gridLayout) {
+		super(gridLayout);
     	setOpaque(false);
 	}
 
