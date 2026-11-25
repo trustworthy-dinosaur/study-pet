@@ -53,5 +53,14 @@ public class MercadoModelo extends DefaultTableModel{
 		}
 		return "no existe";
 	}
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+		
 }
 

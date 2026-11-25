@@ -189,15 +189,15 @@ public class VentanaMascota extends JFrame {
 	
 	protected void filtrar() {
 		//TODO: NO FUNCIONA
+		ArrayList<Item> items2 = new ArrayList<>();
 		String f = txtFiltro.getText().toLowerCase();
 		this.mercadilloModelo.setRowCount(0);
 		for (Item i : items) {
 			if (i.getNombre().toLowerCase().contains(f)) {
-				this.mercadilloModelo.addRow(
-						new Object[] {i.getNombre(), i.getBeneficio(), i.getPrecio(), i.getAlmacen()} );
-
-			}}
-		
+				items2.add(i);
+			}
+			}
+		mercadilloModelo.setItems(items2);
 	}
 	
 	public static ArrayList<Item> crearItems() {
